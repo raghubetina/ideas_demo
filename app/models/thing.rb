@@ -5,6 +5,10 @@ class Thing < ApplicationRecord
 
   # Validations
 
+  validates :description, uniqueness: true
+
+  validates :description, presence: true
+
   # Scopes
 
   def to_s
