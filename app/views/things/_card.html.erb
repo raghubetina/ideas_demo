@@ -8,6 +8,9 @@
       <dt>Description</dt>
       <dd><%= thing.description %></dd>
 
+      <dt>User</dt>
+      <dd><%= thing.user_id %></dd>
+
     </dl>
 
     <div class="row">
@@ -16,14 +19,18 @@
       </div>
 
       <div class="col">
-        <%= link_to edit_thing_url(thing), class: "btn btn-block btn-outline-secondary" do %>
-          <i class="fas fa-edit"></i>
+        <% if current_user == @thing.user %>
+          <%= link_to edit_thing_url(thing), class: "btn btn-block btn-sm btn-outline-secondary" do %>
+            <i class="fas fa-edit"></i>
+          <% end %>
         <% end %>
       </div>
 
       <div class="col">
-        <%= link_to thing, method: :delete, data: { confirm: "Do you really want to delete this thing?" }, class: "btn btn-block btn-outline-secondary" do %>
-          <i class="fas fa-trash-alt"></i>
+        <% if current_user == @thing.user %>
+          <%= link_to thing, method: :delete, data: { confirm: "Do you really want to delete this thing?" }, class: "btn btn-block btn-outline-secondary" do %>
+            <i class="fas fa-trash-alt"></i>
+          <% end %>
         <% end %>
       </div>
     </div>

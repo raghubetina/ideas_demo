@@ -1,13 +1,14 @@
-class ThingResource < ApplicationResource
+class UserResource < ApplicationResource
+  secondary_endpoint "/current_user", [:show]
   attribute :id, :integer, writable: false
   attribute :created_at, :datetime, writable: false
   attribute :updated_at, :datetime, writable: false
-  attribute :description, :string
-  attribute :user_id, :integer
+  attribute :email, :string
+  attribute :password, :string
 
   # Direct associations
 
-  belongs_to :user
+  has_many :things
 
   # Indirect associations
 end
