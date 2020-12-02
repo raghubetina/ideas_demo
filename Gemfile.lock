@@ -282,6 +282,7 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     rexml (3.2.4)
+    rollbar (3.1.1)
     rspec (3.10.0)
       rspec-core (~> 3.10.0)
       rspec-expectations (~> 3.10.0)
@@ -390,6 +391,7 @@ DEPENDENCIES
   pg (>= 0.18, < 2.0)
   puma (~> 4.1)
   rails (~> 6.0.2, >= 6.0.2.2)
+  rollbar
   rspec-rails
   rubocop-rails (= 2.5.2)
   sass-rails (>= 6)
