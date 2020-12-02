@@ -7,5 +7,4 @@ class ThingResource < ApplicationResource
   # Direct associations
 
   # Indirect associations
-
 end

@@ -1,15 +1,14 @@
 class ThingsController < ApplicationController
-  before_action :set_thing, only: [:show, :edit, :update, :destroy]
+  before_action :set_thing, only: %i[show edit update destroy]
 
   # GET /things
   def index
     @q = Thing.ransack(params[:q])
-    @things = @q.result(:distinct => true).page(params[:page]).per(10)
+    @things = @q.result(distinct: true).page(params[:page]).per(10)
   end
 
   # GET /things/1
-  def show
-  end
+  def show; end
 
   # GET /things/new
   def new
@@ -17,15 +16,14 @@ class ThingsController < ApplicationController
   end
 
   # GET /things/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /things
   def create
     @thing = Thing.new(thing_params)
 
     if @thing.save
-      redirect_to @thing, notice: 'Thing was successfully created.'
+      redirect_to @thing, notice: "Thing was successfully created."
     else
       render :new
     end
@@ -34,7 +32,7 @@ class ThingsController < ApplicationController
   # PATCH/PUT /things/1
   def update
     if @thing.update(thing_params)
-      redirect_to @thing, notice: 'Thing was successfully updated.'
+      redirect_to @thing, notice: "Thing was successfully updated."
     else
       render :edit
     end
@@ -43,17 +41,18 @@ class ThingsController < ApplicationController
   # DELETE /things/1
   def destroy
     @thing.destroy
-    redirect_to things_url, notice: 'Thing was successfully destroyed.'
+    redirect_to things_url, notice: "Thing was successfully destroyed."
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_thing
-      @thing = Thing.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def thing_params
-      params.require(:thing).permit(:description)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_thing
+    @thing = Thing.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def thing_params
+    params.require(:thing).permit(:description)
+  end
 end
