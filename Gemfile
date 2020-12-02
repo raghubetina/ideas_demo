@@ -45,6 +45,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "activeadmin", "2.2.0"
 gem "coffee-rails"
+gem "devise", "~> 4.7.2"
 gem "graphiti", "~> 1.2"
 gem "graphiti-rails", github: "firstdraft/graphiti-rails", branch: "develop"
 gem "ideas_generators", github: "firstdraft/ideas_generators"
@@ -69,6 +70,7 @@ end
 gem "activerecord-import"
 gem "bootstrap3-datetimepicker-rails", "~> 4.17.43"
 gem "bootstrap4-kaminari-views"
+gem "doorkeeper", "~> 5.4.0"
 gem "kaminari"
 gem "momentjs-rails", ">= 2.9.0"
 gem "ransack"

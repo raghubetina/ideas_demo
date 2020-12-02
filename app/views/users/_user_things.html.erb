@@ -1,0 +1,25 @@
+<div class="card">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    Things
+
+    <a data-toggle="collapse" href="#user_things_new_form">
+      Add thing
+    </a>
+  </div>
+
+  <ul class="list-group list-group-flush">
+    <% @user.things.each do |thing| %>
+      <li class="list-group-item d-flex align-items-center justify-content-between">
+        <%= link_to thing.to_s, thing_path(thing) %>
+
+      </li>
+    <% end %>
+
+    <div class="card-footer">
+      <div class="collapse" id="user_things_new_form">
+        <%= render partial: "users/user_things_new_form" %>
+      </div>
+    </div>
+
+  </ul>
+</div>

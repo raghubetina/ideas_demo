@@ -1,9 +1,11 @@
 class ThingsController < ApplicationController
+  before_action :current_user_must_be_thing_user, only: %i[edit update destroy]
+
   before_action :set_thing, only: %i[show edit update destroy]
 
   def index
-    @q = Thing.ransack(params[:q])
-    @things = @q.result(distinct: true).page(params[:page]).per(10)
+    @q = current_user.things.ransack(params[:q])
+    @things = @q.result(distinct: true).includes(:user).page(params[:page]).per(10)
   end
 
   def show; end
@@ -18,7 +20,12 @@ class ThingsController < ApplicationController
     @thing = Thing.new(thing_params)
 
     if @thing.save
-      redirect_to @thing, notice: "Thing was successfully created."
+      message = "Thing was successfully created."
+      if Rails.application.routes.recognize_path(request.referer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
+        redirect_back fallback_location: request.referer, notice: message
+      else
+        redirect_to @thing, notice: message
+      end
     else
       render :new
     end
@@ -34,16 +41,28 @@ class ThingsController < ApplicationController
 
   def destroy
     @thing.destroy
-    redirect_to things_url, notice: "Thing was successfully destroyed."
+    message = "Thing was successfully deleted."
+    if Rails.application.routes.recognize_path(request.referer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
+      redirect_back fallback_location: request.referer, notice: message
+    else
+      redirect_to things_url, notice: message
+    end
   end
 
   private
+
+  def current_user_must_be_thing_user
+    set_thing
+    unless current_user == @thing.user
+      redirect_back fallback_location: root_path, alert: "You are not authorized for that."
+    end
+  end
 
   def set_thing
     @thing = Thing.find(params[:id])
   end
 
   def thing_params
-    params.require(:thing).permit(:description)
+    params.require(:thing).permit(:description, :user_id)
   end
 end
