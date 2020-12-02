@@ -3,7 +3,8 @@ class ThingsController < ApplicationController
 
   # GET /things
   def index
-    @things = Thing.page(params[:page]).per(10)
+    @q = Thing.ransack(params[:q])
+    @things = @q.result(:distinct => true).page(params[:page]).per(10)
   end
 
   # GET /things/1
