@@ -6,9 +6,7 @@
   <div class="card-body">
     <dl class="mb-1">
       <dt>Description</dt>
-      <!-- Display description start -->
       <dd><%= thing.description %></dd>
-      <!-- Display description end -->
 
     </dl>
 
@@ -17,21 +15,17 @@
         <%= link_to_show_or_back thing, '<i class="fas fa-search-plus"></i>'.html_safe, '<i class="fas fa-chevron-left"></i>'.html_safe, class: "btn btn-block btn-outline-secondary" %>
       </div>
 
-      <!-- Edit link thing start -->
       <div class="col">
         <%= link_to edit_thing_url(thing), class: "btn btn-block btn-outline-secondary" do %>
           <i class="fas fa-edit"></i>
         <% end %>
       </div>
-      <!-- Edit link thing end -->
 
-      <!-- Delete link thing start -->
       <div class="col">
         <%= link_to thing, method: :delete, data: { confirm: "Do you really want to delete this thing?" }, class: "btn btn-block btn-outline-secondary" do %>
           <i class="fas fa-trash-alt"></i>
         <% end %>
       </div>
-      <!-- Delete link thing end -->
     </div>
   </div>
 
