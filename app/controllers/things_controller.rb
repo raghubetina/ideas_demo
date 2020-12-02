@@ -3,7 +3,7 @@ class ThingsController < ApplicationController
 
   # GET /things
   def index
-    @things = Thing.all
+    @things = Thing.page(params[:page]).per(10)
   end
 
   # GET /things/1
